@@ -4,6 +4,19 @@
 
 *Concept visualization of a multi-agent workflow where specialized AI agents collaborate to process, evaluate, prioritize, and route inbound customer inquiries.*
 
+![Office Visualization](docs/office-visualization.png)
+
+*Concept visualization of the multi-agent workflow used in this project.*
+
+The image above represents the four specialized AI agents that process each customer inquiry:
+
+1. Intake Agent — structures incoming requests
+2. Qualification Agent — validates lead quality
+3. Priority Scoring Agent — determines urgency and business impact
+4. Routing Agent — recommends the next action
+
+Each agent is responsible for a specific stage of the workflow and passes information to the next agent until a final routing decision is produced.
+
 ---
 
 ## Project Overview
