@@ -80,7 +80,7 @@ The output is a structured queue of prioritized leads with recommended next acti
 
 The workflow generates a prioritized lead queue that business operators can use to focus on the highest-impact opportunities first.
 
-![Prioritized Lead Queue](docs/lead-queue-screenshot.png)
+![Prioritized Lead Queue](docs/prioritized_lead_queue.png)
 
 Each processed inquiry receives:
 
@@ -96,7 +96,7 @@ Each processed inquiry receives:
 
 The final workflow processed 500 simulated inbound customer inquiries.
 
-![Summary Metrics](docs/summary-metrics.png)
+![Summary Metrics](docs/lead_summary_metrics.png)
 
 ### Processing Summary
 
