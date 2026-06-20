@@ -113,7 +113,7 @@ Responsibilities:
 
 The workflow generates a prioritized lead queue that operators can use to focus attention on the highest-impact opportunities first.
 
-![Prioritized Lead Queue](docs/prioritized-lead-queue.png)
+![Prioritized Lead Queue](docs/prioritized_lead_queue.png)
 
 Each processed inquiry receives:
 
@@ -129,7 +129,7 @@ Each processed inquiry receives:
 
 The final workflow processed 500 simulated inbound customer inquiries.
 
-![Lead Summary Metrics](docs/lead-summary-metrics.png)
+![Lead Summary Metrics](docs/lead_summary_metrics.png)
 
 ### Processing Summary
 
