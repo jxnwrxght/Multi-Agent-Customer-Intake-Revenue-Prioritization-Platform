@@ -4,10 +4,6 @@
 
 *Concept visualization of a multi-agent workflow where specialized AI agents collaborate to process, evaluate, prioritize, and route inbound customer inquiries.*
 
-![Office Visualization](docs/office-visualization.png)
-
-*Concept visualization of the multi-agent workflow used in this project.*
-
 The image above represents the four specialized AI agents that process each customer inquiry:
 
 1. Intake Agent — structures incoming requests
