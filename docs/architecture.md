@@ -1,55 +1,82 @@
-# Architecture
+# System Architecture
 
-This project is a local command-line prototype. It reads fake inbound customer messages from a CSV file, runs each message through four specialized agents, and writes lead-level and run-level outputs.
+This project demonstrates a local multi-agent workflow for customer inquiry intake and revenue prioritization. The goal is to show how a service business could turn raw inbound messages into an ordered queue of next actions.
 
-## ASCII Diagram
+## Architecture Diagram
 
 ```text
-                 +-----------------------+
-                 | data/inbound_customer_inquiries.csv |
-                 +-----------+-----------+
-                             |
-                             v
-                    +----------------+
-                    | Intake Agent   |
-                    | extracts facts |
-                    +-------+--------+
-                            |
-                            v
-              +---------------------------+
-              | Qualification Agent       |
-              | checks scope and quality  |
-              +-------------+-------------+
-                            |
-                            v
-              +---------------------------+
-              | Scoring Agent             |
-              | scores lead from 0 to 100 |
-              +-------------+-------------+
-                            |
-                            v
-                    +----------------+
-                    | Routing Agent  |
-                    | chooses action |
-                    +-------+--------+
-                            |
-              +-------------+-------------+
-              |                           |
-              v                           v
-+-------------------------------+ +-----------------------------+
-| outputs/prioritized_lead_queue.csv | | outputs/lead_summary_metrics.csv |
-+-------------------------------+ +-----------------------------+
+                 +--------------------------------------+
+                 | data/inbound_customer_inquiries.csv  |
+                 | 500 fake inbound customer messages   |
+                 +------------------+-------------------+
+                                    |
+                                    v
+                         +--------------------+
+                         | Intake Agent       |
+                         | extracts facts     |
+                         +---------+----------+
+                                   |
+                                   v
+                         +--------------------+
+                         | Qualification Agent|
+                         | checks fit/action  |
+                         +---------+----------+
+                                   |
+                                   v
+                         +--------------------+
+                         | Scoring Agent      |
+                         | ranks priority     |
+                         +---------+----------+
+                                   |
+                                   v
+                         +--------------------+
+                         | Routing Agent      |
+                         | chooses next step  |
+                         +---------+----------+
+                                   |
+        +--------------------------+--------------------------+
+        |                          |                          |
+        v                          v                          v
++-----------------------+ +-----------------------+ +----------------------+
+| Prioritized Lead Queue| | Lead Summary Metrics  | | Executive Summary    |
+| CSV for operations    | | CSV for reporting     | | Markdown report      |
++-----------------------+ +-----------------------+ +----------------------+
 ```
 
-## Flow
+## Agent Responsibilities
 
-1. `src/run_pipeline.py` loads rows from `data/inbound_customer_inquiries.csv`.
-2. The Intake Agent extracts service type, issue summary, urgency, intent, timing, and missing information.
-3. The Qualification Agent decides whether the lead is in scope, whether it is likely revenue-generating, whether it is complete, and whether follow-up is needed.
-4. The Scoring Agent assigns a score from 0 to 100 and a priority level.
-5. The Routing Agent chooses the next action for operations.
-6. The pipeline writes a prioritized lead CSV and a summary metrics CSV.
+### Intake Agent
 
-## Design Choice
+The Intake Agent converts unstructured text into structured business fields:
 
-The agents are intentionally rule-based in Version 1. This keeps the project local, deterministic, and easy to explain in an interview. In a production version, the extraction step could use an LLM, while qualification, scoring, and routing could remain partly rule-based so the business logic stays auditable.
+- Service Type
+- Issue Summary
+- Urgency
+- Customer Intent
+- Timing Need
+- Missing Information
+
+### Qualification Agent
+
+The Qualification Agent evaluates whether a lead is in scope, complete enough for action, and worth follow-up. It assigns lead quality labels such as High, Medium, Needs follow-up, Out of scope, or Spam.
+
+### Scoring Agent
+
+The Scoring Agent applies deterministic business rules to create a 0-100 priority score. The score considers urgency, service value, customer intent, timing sensitivity, and information completeness.
+
+### Routing Agent
+
+The Routing Agent translates the score and qualification result into an operational recommendation:
+
+- Notify contractor immediately
+- Send booking link
+- Ask follow-up question
+- Schedule normal callback
+- Nurture
+- Ignore/spam
+
+## Why This Architecture
+
+The four-agent design keeps the business logic easy to explain. Each agent owns one decision stage, which makes the workflow easier to audit and improve. In a production setting, each agent could be upgraded independently without changing the full pipeline.
+
+This is intentionally not a web app. The project focuses on the operational decision system: intake, qualification, prioritization, and routing.

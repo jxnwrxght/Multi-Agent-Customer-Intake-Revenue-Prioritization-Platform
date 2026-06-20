@@ -1,43 +1,27 @@
-# System Notes
+# Implementation Notes
 
-## Why Multiple Agents
+## Design Decisions
 
-This prototype separates the workflow into four agents because customer intake decisions are easier to understand when each step has a clear responsibility. A single script could perform every rule in one place, but that would make the business logic harder to explain, test, and adjust.
+This project uses deterministic Python rules instead of external AI services. That choice keeps the workflow transparent, local, and easy to run during portfolio review.
 
-The multi-agent structure also mirrors how a production system might evolve. Extraction, qualification, scoring, and routing can each be improved independently without rewriting the full pipeline.
+The code is separated into one file per agent:
 
-## Agent Responsibilities
+- `src/intake_agent.py`
+- `src/qualification_agent.py`
+- `src/scoring_agent.py`
+- `src/routing_agent.py`
 
-### Intake Agent
+The orchestration script, `src/run_pipeline.py`, is intentionally simple. It loads the input CSV, runs each agent in sequence, writes output files, and prints summary metrics.
 
-The Intake Agent turns an unstructured customer message into structured fields:
+## Scoring Logic
 
-- Service type
-- Issue summary
-- Urgency
-- Customer intent
-- Timing need
-- Missing information
-
-Version 1 uses keyword rules so the behavior is deterministic and easy to inspect.
-
-### Qualification Agent
-
-The Qualification Agent decides whether the lead is in scope, likely revenue-generating, and actionable. It assigns a lead quality label such as High, Medium, Needs follow-up, Out of scope, or Spam.
-
-This keeps business fit separate from priority scoring. For example, an urgent but out-of-scope message should not be treated the same as an urgent HVAC emergency.
-
-### Scoring Agent
-
-The Scoring Agent assigns a score from 0 to 100 using five factors:
+The Scoring Agent assigns points across five business factors:
 
 - Urgency
 - Service value
 - Customer intent
 - Timing sensitivity
 - Completeness of information
-
-Emergency terms, same-day timing, clear service requests, and complete details raise the score. Missing information and out-of-scope requests reduce the score.
 
 Priority levels are assigned from the final score:
 
@@ -46,19 +30,41 @@ Priority levels are assigned from the final score:
 - Medium: 35-59
 - Low: 0-34
 
-### Routing Agent
+## Routing Logic
 
-The Routing Agent chooses the next action based on lead quality, completeness, and priority:
+Routing decisions are designed to mirror realistic service-business operations:
 
-- Notify contractor immediately for critical, actionable emergencies
-- Send booking link for strong quote or installation leads
-- Ask follow-up question when key details are missing
-- Schedule normal callback for useful but non-emergency leads and existing customer follow-ups
-- Nurture low-urgency in-scope leads that are not ready for immediate scheduling
-- Ignore/spam for spam, opt-out, or unsupported requests
+- Critical actionable leads notify the contractor immediately.
+- Strong quote and installation leads receive a booking link.
+- Incomplete leads trigger a follow-up question.
+- Useful but non-emergency leads receive a normal callback.
+- Low-urgency leads can be nurtured.
+- Spam and out-of-scope messages are ignored or filtered.
 
-## Production Considerations
+## Assumptions
 
-A production version would likely replace or supplement these rules with LLM-powered extraction, confidence scores, and validation against CRM data. It would also need human approval controls, audit logs, live SMS or web form integrations, calendar availability, and monitoring for missed high-priority cases.
+- The sample data is fake and created for demonstration.
+- The service categories are HVAC, plumbing, electrical, and cleaning.
+- Keyword rules are sufficient for Version 1 demonstration.
+- The system is designed for local review, not live production use.
+- Output files are regenerated each time `python3 src/run_pipeline.py` runs.
 
-The current version is intentionally local and rule-based. Its purpose is to demonstrate the architecture and decision logic in a way that can be reviewed, run, and explained without paid services or API keys.
+## Limitations
+
+- No LLM extraction in Version 1.
+- No confidence scoring for extracted fields.
+- No CRM, SMS, email, or booking integration.
+- No human approval workflow.
+- No live customer data.
+- Keyword matching can miss ambiguous or unusually phrased messages.
+
+## Production Roadmap
+
+- Add LLM-powered extraction with confidence scores.
+- Add validation against CRM records and existing customer history.
+- Connect live SMS, email, website forms, and chat inputs.
+- Add calendar availability and booking-link generation.
+- Add human review for critical, uncertain, or high-value leads.
+- Add audit logs for each scoring and routing decision.
+- Add dashboard views for operators and managers.
+- Add automated tests for scoring, routing, and edge cases.
