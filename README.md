@@ -2,138 +2,117 @@
 
 ![Office Visualization](docs/office-visualization.png)
 
-A practical AI Operations case study exploring how specialized agents can work together to review, qualify, prioritize, and route inbound customer inquiries.
+*Concept visualization of a multi-agent workflow where specialized AI agents collaborate to process, evaluate, prioritize, and route inbound customer inquiries.*
 
 ---
 
-## Why I Built This
+## Project Overview
 
-As I learned more about AI Operations and workflow automation, I became interested in how multiple AI agents could collaborate on a real business process rather than operate as isolated tools.
+This project started as an experiment to better understand how multiple AI agents could collaborate on a real business workflow instead of operating as isolated tools.
 
-Customer intake felt like a useful example.
+Most AI demos focus on a single model performing a single task. In practice, business processes involve multiple decisions, reviews, and handoffs before an outcome is reached.
 
-Service businesses receive inquiries with very different levels of urgency, value, and completeness. An HVAC emergency should not be handled the same way as a routine estimate request or an incomplete customer message.
+To explore that concept, I built a simplified customer intake workflow where specialized agents work together to evaluate and prioritize inbound inquiries.
 
-I wanted to build a simple system that simulates how specialized agents could work together to review inbound inquiries, evaluate lead quality, assign priority scores, and recommend the next operational action.
-
-The goal was not to build a production product. The goal was to design and demonstrate a clear multi-agent workflow that solves a practical business problem.
+The result is a multi-agent system that processes incoming customer requests, determines their quality and urgency, assigns a priority score, and recommends the appropriate next action.
 
 ---
 
-## Business Context
+## Business Problem
 
-Imagine a contractor receiving dozens of inquiries every week.
+Service businesses receive inquiries of varying quality and urgency.
 
-Some customers need emergency service immediately.
+Some requests represent immediate revenue opportunities.
 
-Some are requesting estimates for future projects.
+Others require follow-up, additional information, or may not be a good fit at all.
 
-Others provide incomplete information or are not legitimate opportunities at all.
+Without a structured intake process, valuable opportunities can be delayed while low-value inquiries consume the same amount of attention.
 
-When every inquiry enters the same queue, valuable opportunities can be delayed while low-priority requests consume time and attention.
-
-This project explores how a multi-agent workflow can help solve that problem by automatically reviewing, prioritizing, and routing inquiries before a human operator becomes involved.
+This project explores how specialized AI agents can help create a more consistent and scalable decision-making process.
 
 ---
 
-## System Overview
+## Workflow
 
-The workflow is organized around four specialized agents.
+Customer Inquiry
+
+↓
+
+Intake Agent
+
+↓
+
+Qualification Agent
+
+↓
+
+Priority Scoring Agent
+
+↓
+
+Routing Agent
+
+↓
+
+Business Outcome
+
+---
+
+## Multi-Agent Architecture
+
+![Architecture Diagram](docs/architecture-diagram.png)
 
 ### Intake Agent
 
 Responsibilities:
 
-- Extract service type
-- Identify urgency
-- Capture timing requirements
-- Determine customer intent
-
-Output:
-
-Structured inquiry details.
-
----
+* Extract service type
+* Capture customer details
+* Identify urgency signals
+* Structure raw inquiry data
 
 ### Qualification Agent
 
 Responsibilities:
 
-- Review completeness
-- Verify relevance
-- Evaluate lead quality
-- Identify missing information
-
-Output:
-
-Qualified lead assessment.
-
----
+* Validate inquiry completeness
+* Determine lead quality
+* Confirm business fit
+* Flag missing information
 
 ### Priority Scoring Agent
 
 Responsibilities:
 
-- Score urgency
-- Score revenue potential
-- Score timing sensitivity
-- Score information completeness
-
-Output:
-
-Priority score from 0–100 and assigned priority level.
-
----
+* Assign numerical priority score
+* Estimate business impact
+* Evaluate urgency
+* Categorize inquiry priority
 
 ### Routing Agent
 
 Responsibilities:
 
-- Recommend next action
-- Escalate critical inquiries
-- Route booking opportunities
-- Request missing information
-- Ignore spam or out-of-scope inquiries
-
-Output:
-
-Operational recommendation for the business.
-
----
-
-## Workflow Architecture
-
-![Architecture Diagram](docs/architecture-diagram.png)
-
-```text
-Customer Inquiry
-        ↓
-Intake Agent
-        ↓
-Qualification Agent
-        ↓
-Priority Scoring Agent
-        ↓
-Routing Agent
-        ↓
-Prioritized Lead Queue
-```
+* Determine recommended next action
+* Route high-priority opportunities
+* Generate follow-up recommendations
+* Support operational decision making
 
 ---
 
 ## Example Output
 
-The workflow generates a prioritized lead queue that business operators can use to focus on the highest-impact opportunities first.
+The workflow generates a prioritized lead queue that operators can use to focus attention on the highest-impact opportunities first.
 
 ![Prioritized Lead Queue](docs/prioritized-lead-queue.png)
 
 Each processed inquiry receives:
 
-- Service Type
-- Lead Quality
-- Priority Score
-- Priority Level
-- Routing Decision
+* Service Type
+* Lead Quality
+* Priority Score
+* Priority Level
+* Routing Recommendation
 
 ---
 
@@ -145,49 +124,33 @@ The final workflow processed 500 simulated inbound customer inquiries.
 
 ### Processing Summary
 
-| Metric | Value |
-|----------|----------|
-| Total Inquiries Processed | 500 |
-| Critical Leads | 110 |
-| High Priority Leads | 110 |
-| Medium Priority Leads | 170 |
-| Low Priority Leads | 110 |
-| Spam / Out-of-Scope Leads | 50 |
-| Average Priority Score | 51.7 |
+| Metric                    | Value |
+| ------------------------- | ----- |
+| Total Inquiries Processed | 500   |
+| Critical Leads            | 110   |
+| High Priority Leads       | 110   |
+| Medium Priority Leads     | 170   |
+| Low Priority Leads        | 110   |
+| Spam / Out of Scope       | 50    |
+| Average Priority Score    | 51.72 |
 
 ---
 
-## What This Project Demonstrates
+## Key Takeaways
 
-This project is less about Python itself and more about workflow design.
+Building this project reinforced several ideas:
 
-The focus was on:
-
-- Breaking a business process into specialized agent responsibilities
-- Designing decision logic between agents
-- Creating explainable prioritization rules
-- Producing outputs that operations teams can actually use
-- Simulating how multiple agents can collaborate within a larger workflow
-
-While the current version uses rule-based logic and simulated data, the same architecture could be extended with:
-
-- LLM-powered extraction
-- CRM integrations
-- SMS and email systems
-- Scheduling platforms
-- Human approval workflows
-- Operational dashboards
+* AI systems become more useful when responsibilities are clearly separated.
+* Workflow design often matters more than model selection.
+* Explainable decision logic is critical for business adoption.
+* Multi-agent systems are fundamentally coordination problems.
+* The most valuable AI implementations improve existing workflows rather than replace them.
 
 ---
 
 ## Repository Contents
 
 ```text
-Multi-Agent-Customer-Intake-Revenue-Prioritization-Platform/
-
-README.md
-requirements.txt
-
 data/
 │
 ├── inbound_customer_inquiries.csv
@@ -207,47 +170,12 @@ outputs/
 
 src/
 │
+├── intake_agent.py
+├── qualification_agent.py
+├── scoring_agent.py
+├── routing_agent.py
 ├── run_pipeline.py
-├── intake_and_qualification_agents.py
-├── priority_scoring.py
-├── routing_decisions.py
+
+README.md
+requirements.txt
 ```
-
----
-
-## Limitations
-
-Current version:
-
-- Rule-based decision engine
-- Simulated customer inquiries
-- No live CRM integration
-- No SMS integration
-- No LLM-powered extraction
-- No human review layer
-
-This project is intended as a workflow design and AI Operations case study rather than a production deployment.
-
----
-
-## Future Enhancements
-
-Potential next steps include:
-
-- LLM-powered lead extraction
-- CRM integration
-- Real-time messaging workflows
-- Calendar and booking integrations
-- Human approval checkpoints
-- Agent performance monitoring
-- Explainability and audit logging
-
----
-
-## Author
-
-Jon Wright
-
-AI Operations • Workflow Automation • Process Design
-
-This project was created as part of my AI Operations portfolio to explore how specialized agents can collaborate to solve practical business problems.
