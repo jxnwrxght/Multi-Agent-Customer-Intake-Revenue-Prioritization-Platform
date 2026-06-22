@@ -118,21 +118,21 @@ Building this project reinforced several ideas:
 
 ## Repository Contents
 
-Docs
+docs/
 ├── office-visualization.png
 ├── architecture-diagram.png
 ├── prioritized-lead-queue.png
 ├── lead-summary-metrics.png
 └── implementation-notes.md
 
-Data
+data/
 └── inbound_customer_inquiries.csv
 
-Outputs
+outputs/
 ├── prioritized_lead_queue.csv
 └── lead_summary_metrics.csv
 
-Src
+src/
 ├── intake_agent.py
 ├── scoring_agent.py
 ├── routing_agent.py
