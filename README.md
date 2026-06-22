@@ -4,15 +4,6 @@
 
 *Concept visualization of a multi-agent workflow where specialized AI agents collaborate to process, evaluate, prioritize, and route inbound customer inquiries.*
 
-The image above represents the four specialized AI agents that process each customer inquiry:
-
-1. Intake Agent — structures incoming requests
-2. Qualification Agent — validates lead quality
-3. Priority Scoring Agent — determines urgency and business impact
-4. Routing Agent — recommends the next action
-
-Each agent is responsible for a specific stage of the workflow and passes information to the next agent until a final routing decision is produced.
-
 ---
 
 ## Project Overview
@@ -29,41 +20,9 @@ The result is a multi-agent system that processes incoming customer requests, de
 
 ## Business Problem
 
-Service businesses receive inquiries of varying quality and urgency.
-
-Some requests represent immediate revenue opportunities.
-
-Others require follow-up, additional information, or may not be a good fit at all.
-
-Without a structured intake process, valuable opportunities can be delayed while low-value inquiries consume the same amount of attention.
+Service businesses receive inquiries of varying quality and urgency. Some requests represent immediate revenue opportunities. Others require follow-up, additional information, or may not be a good fit at all. Without a structured intake process, valuable opportunities can be delayed while low-value inquiries consume the same amount of attention.
 
 This project explores how specialized AI agents can help create a more consistent and scalable decision-making process.
-
----
-
-## Workflow
-
-Customer Inquiry
-
-↓
-
-Intake Agent
-
-↓
-
-Qualification Agent
-
-↓
-
-Priority Scoring Agent
-
-↓
-
-Routing Agent
-
-↓
-
-Business Outcome
 
 ---
 
@@ -159,11 +118,6 @@ Building this project reinforced several ideas:
 
 ## Repository Contents
 
-```text
-data/
-│
-├── inbound_customer_inquiries.csv
-
 docs/
 │
 ├── office-visualization.png
@@ -171,6 +125,8 @@ docs/
 ├── prioritized-lead-queue.png
 ├── lead-summary-metrics.png
 ├── implementation-notes.md
+  data/
+    - inbound_customer_inquiries.csv
 
 outputs/
 │
