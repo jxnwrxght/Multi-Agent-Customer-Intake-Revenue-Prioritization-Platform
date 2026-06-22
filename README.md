@@ -128,15 +128,15 @@ Docs
     - inbound_customer_inquiries.csv
 
 Outputs
-─ prioritized_lead_queue.csv
-─ lead_summary_metrics.csv
+- prioritized_lead_queue.csv
+- lead_summary_metrics.csv
 
 Src
-─ intake_agent.py
-─ qualification_agent.py
-─ scoring_agent.py
-─ routing_agent.py
-─ run_pipeline.py
+- intake_agent.py
+- qualification_agent.py
+- scoring_agent.py
+- routing_agent.py
+- run_pipeline.py
 
 README.md
 requirements.txt
