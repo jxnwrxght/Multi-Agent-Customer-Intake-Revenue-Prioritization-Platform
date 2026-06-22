@@ -118,29 +118,25 @@ Building this project reinforced several ideas:
 
 ## Repository Contents
 
-docs/
-│
-├── office-visualization.png
-├── architecture-diagram.png
-├── prioritized-lead-queue.png
-├── lead-summary-metrics.png
-├── implementation-notes.md
-  data/
+Docs
+─ office-visualization.png
+─ architecture-diagram.png
+─ prioritized-lead-queue.png
+─ lead-summary-metrics.png
+─ implementation-notes.md
+- data/
     - inbound_customer_inquiries.csv
 
-outputs/
-│
-├── prioritized_lead_queue.csv
-├── lead_summary_metrics.csv
+Outputs
+─ prioritized_lead_queue.csv
+─ lead_summary_metrics.csv
 
-src/
-│
-├── intake_agent.py
-├── qualification_agent.py
-├── scoring_agent.py
-├── routing_agent.py
-├── run_pipeline.py
+Src
+─ intake_agent.py
+─ qualification_agent.py
+─ scoring_agent.py
+─ routing_agent.py
+─ run_pipeline.py
 
 README.md
 requirements.txt
-```
