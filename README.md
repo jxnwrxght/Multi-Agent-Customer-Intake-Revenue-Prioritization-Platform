@@ -119,11 +119,11 @@ Building this project reinforced several ideas:
 ## Repository Contents
 
 docs/
-├── office-visualization.png
-├── architecture-diagram.png
-├── prioritized-lead-queue.png
-├── lead-summary-metrics.png
-└── implementation-notes.md
+- office-visualization.png
+- architecture-diagram.png
+- prioritized-lead-queue.png
+- lead-summary-metrics.png
+- implementation-notes.md
 
 data/
 └── inbound_customer_inquiries.csv
