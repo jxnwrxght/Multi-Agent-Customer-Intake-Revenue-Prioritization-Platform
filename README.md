@@ -119,23 +119,24 @@ Building this project reinforced several ideas:
 ## Repository Contents
 
 Docs
-─ architecture-diagram.png
-─ office-visualization.png
-─ project-overview.md
-- data/
-    ─ sample-customer-inquiries.csv
+├── office-visualization.png
+├── architecture-diagram.png
+├── prioritized-lead-queue.png
+├── lead-summary-metrics.png
+└── implementation-notes.md
 
-Images
-─ prioritized-lead-queue.png
-─ workflow-results.png
+Data
+└── inbound_customer_inquiries.csv
 
 Outputs
-─ prioritized-lead-queue.csv
-─ workflow-summary.csv
+├── prioritized_lead_queue.csv
+└── lead_summary_metrics.csv
 
 Src
-─ run-pipeline.py
-─ intake-agent.py
-─ qualification-agent.py
-─ priority-scoring-agent.py
-─ routing-agent.py
+├── intake_agent.py
+├── scoring_agent.py
+├── routing_agent.py
+├── run_pipeline.py
+
+README.md
+requirements.txt
